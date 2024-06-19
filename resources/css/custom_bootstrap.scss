@@ -1,0 +1,152 @@
+// custom bootstrap
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+    --tmp-color-orange:#f5ac42;
+    --tmp-color-white : #fffefb;
+    --tmp-color-bleu : #21ccec;
+    --tmp-color-bleu-marine : #170657;
+    --primary:#0d6efd;
+    --success:#198754;
+    --info:#0dcaf0;
+    --warning:#ffc107;
+    --danger:#dc3545;
+    --secondary:#6c757d;
+    --light:#f8f9fa;
+    --dark:#212529;
+  }
+// palette color start
+
+$btn-border-radius:3px;
+
+// palette color end
+
+
+// Import Bootstrap source files
+@import 'bootstrap/scss/bootstrap';
+
+
+.btn-orange {
+    background-color: var(--tmp-color-orange);
+    color:var(--tmp-color-white);
+    &:hover {
+      color: var(--tmp-color-orange);
+      background-color: var(--tmp-color-orange);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+  .btn-primary {
+    &:hover {
+      color: var(--primary);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+
+  .btn-info {
+    &:hover {
+      color: var(--info);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+  .btn-secondary {
+    &:hover {
+      color: var(--secondary);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+  .btn-success {
+    &:hover {
+      color: var(--success);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+  .btn-danger {
+    &:hover {
+      color: var(--danger);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+
+  .btn-warning {
+    &:hover {
+      color: var(--warning);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+  .btn-light {
+    &:hover {
+      color: var(--light);
+      @include gradient-bg(var(--dark));
+    }
+  }
+
+  .btn-dark {
+    &:hover {
+      color: var(--dark);
+      @include gradient-bg(var(--tmp-color-white));
+    }
+  }
+
+
+//   card
+
+
+  .card-title{
+      color : var(--tmp-color-bleu-marine);
+  }
+
+
+
+  .card-text{
+    color : var(--tmp-color-bleu-marine);
+    font-size:12px;
+
+}
+
+   .card-title{
+    color : var(--tmp-color-bleu-marine);
+}
+
+
+.md-fab-wrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1004;
+    -webkit-transition: margin 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: margin 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .md-fab {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #fff;
+    color: #727272;
+    display: block;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: -webkit-box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: -webkit-box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+  }
+  .md-fab:hover,
+  .md-fab:focus,
+  .md-fab:active {
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
