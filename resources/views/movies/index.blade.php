@@ -1,45 +1,41 @@
 @extends('layout.master')
 @section('content')
     <div class="container header-block p-2 mb-3  rounded text-center shadow ">
-        <h5>Mes illustrations </h5>
+        <h5>Movies </h5>
     </div>
     <div class="container bg-white p-5 rounded shadow ">
 
-        @if ($illustrations->count())
+        @if ($movies->count())
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach ($illustrations as $illustration)
+                @foreach ($movies as $movie)
                     <div class="col-lg-3">
                         <div class="card mt-2 ">
-                            <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->titre) }}"
+                            <a href="{{ route('MOVIE-AFFICHER-ILUSTRATION', $movie->id) }}"
                                 class="text-decoration-none">
-                                <img src="{{ asset($illustration->path_illustration) }}" class="card-img-top curor-pointer"
+                                <img src="{{ asset($movie->path_fiche) }}" class="card-img curor-pointer"
                                     alt="...">
                             </a>
-                            <div class="card-body">
-                                <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->titre) }}"
+                            <x-carbon-close style="position:absolute; left:90%"
+                            data-url="{{ route('MOVIE-DELETE-ILUSTRATION', $movie->id) }}"
+                            class="icon-style-btn icon-danger delete-movie" />
+                            <x-gmdi-edit class="icon-style-btn icon-success edit-utilisateur" style="position:absolute; left:80%"
+                            data-url="{{ route('GESTION-UTILISATEUR-EDIT', $movie->id) }}" data-bs-toggle="modal"
+                            data-bs-target="#modal" />
+                            {{-- <div class="card-body">
+                                <a href="{{ route('MOVIE-AFFICHER-ILUSTRATION', $movie->id) }}"
                                     class="text-decoration-none">
-                                    <h6 class="card-title curor-pointer">{{ $illustration->titre }}</h6>
+                                    <h6 class="card-title curor-pointer">{{ $movie->titre }}</h6>
                                 </a>
                                 <div class="card-text" style="float: right">
-                                    @if (count($illustration->getComposantLangueDefault()) == 0)
-                                        <a href="{{ route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION', $illustration->titre) }}"><x-iconpark-targettwo
-                                                class="icon-style-btn icon-warning" /></a>
-                                    @endif
 
-                                    @if (count($illustration->getComposantLangueDefault()) != 0)
 
-                                    <a href="{{ route('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION', $illustration->titre) }}"><x-carbon-edit
-                                            class="icon-style-btn icon-secondary" /></a>
-                                    @endif
-
-                                    {{-- <x-pepicon-loop class="icon-style-btn icon-success" /> --}}
                                     <x-carbon-close
-                                        data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION', $illustration->titre) }}"
-                                        class="icon-style-btn icon-danger delete-illustration" />
+                                        data-url="{{ route('MOVIE-DELETE-ILUSTRATION', $movie->id) }}"
+                                        class="icon-style-btn icon-danger delete-movie" />
 
                                 </div>
 
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -48,7 +44,7 @@
 
             </div>
 
-            {!! $illustrations->links() !!}
+            {!! $movies->links() !!}
         @else
             <div class="text-center">
                 Aucune donnée disponible
@@ -79,18 +75,18 @@
     </div>
 
 
-    @include('illustration.ajouter');
+    @include('movies.ajouter');
 @endsection
 
 @section('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            var illustrations = document.getElementsByClassName('delete-illustration')
-            console.log(illustrations);
+            var movies = document.getElementsByClassName('delete-movie')
+            console.log(movies);
 
-            for (let illustration of illustrations) {
-                illustration.addEventListener('click', function(e) {
+            for (let movie of movies) {
+                movie.addEventListener('click', function(e) {
 
                     Swal.fire({
                         title: "Êtes-vous sûr?",

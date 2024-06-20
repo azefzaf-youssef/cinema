@@ -226,11 +226,12 @@ Artisan::command('BDD_CINEMA', function () {
     Schema::create('movies', function (Blueprint $table) {
 
         $table->increments('id');
-        $table->string('titre')->unique();
+        $table->string('titre');
         $table->string('path_trailer');
-        $table->longText('movie_description');
-        $table->dateTime('time_to_start');
-        $table->date('date_movie');
+        $table->string('path_fiche');
+        $table->longText('description');
+        $table->time('heure');
+        $table->date('date');
         $table->unsignedInteger('id_category');
         $table->timestamps();
         $table->softDeletes();

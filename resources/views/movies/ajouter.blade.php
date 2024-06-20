@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter illustration</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un film</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -10,7 +10,7 @@
                 <div class="col-xxl">
 
                     <div class="card-body">
-                        <form action="{{ route('USER-LOGGED-ADD-POST') }}" method="POST" enctype="multipart/form-data"
+                        <form action="{{ route('MOVIE-ADD-POST') }}" method="POST" enctype="multipart/form-data"
                             id="post-illutration">
                             @csrf
                             <div class="row mb-3">
@@ -22,37 +22,61 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-phone">Domaine</label>
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Déscription</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" name="domaine" id="exampleFormControlSelect1">
-                                        @foreach ($domaines as $domaine)
-                                            <option value="{{ $domaine->id }}">{{ $domaine->domaine }}</option>
+
+
+                                        <textarea class="form-control" id="Description" name="description" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Date de sortie</label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control" name="date" id="date"
+                                        placeholder="Date" />
+                                </div>
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Heure </label>
+                                <div class="col-sm-4">
+                                    <input type="time" class="form-control" name="heure" id="heure"
+                                        placeholder="heure" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-phone">Catégory</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="category" id="exampleFormControlSelect1">
+                                        @foreach ($categories as $categorie)
+                                            <option value="{{ $categorie->id }}">{{ $categorie->category }}</option>
                                         @endforeach
 
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-phone">Langue</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="langue" id="exampleFormControlSelect1">
-                                        @foreach ($langues as $langue)
-                                            <option value="{{ $langue->id }}">{{ $langue->langue }}</option>
-                                        @endforeach
 
-                                    </select>
+
+                            <div class="row mb-3">
+
+                                <label class="col-sm-2 col-form-label" for="trailer">Trailer</label>
+
+                                <div class="col-sm-10">
+                                    <input type="file" class="custom-file-input"  max="2"  name="trailer"
+                                        id="trailer">
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
 
-                                <label class="col-sm-2 col-form-label" for="illustration">Illustration</label>
+                                <label class="col-sm-2 col-form-label" for="trailer">Fiche</label>
 
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control-file" max="2"  name="illustration"
-                                        id="illustration">
+                                    <input type="file" class="custom-file-input"  max="2"  name="fiche"
+                                        id="fiche">
                                 </div>
+
                             </div>
 
                             <div class="row justify-content-end">
@@ -76,6 +100,12 @@
 <script>
 
     document.addEventListener("DOMContentLoaded", function() {
+
+        $('#datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            todayHighlight: true,
+            autoclose: true
+        });
 
         var myModal = new Modal(document.getElementById('exampleModal'), {
             keyboard: false

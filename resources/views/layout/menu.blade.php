@@ -1,8 +1,8 @@
 
 <nav class="navbar shadow navbar-expand-md  black-bg white-color " >
     <div class="container">
-        <a class="navbar-brand" href="{{ route('HOME') }}">
-            Terminologio
+        <a class="navbar-brand" href="{{ route('MOVIE-INDEX') }}">
+            Cinéma
         </a>
 
 
@@ -11,14 +11,14 @@
 
 
                 <li class="nav-item ">
-                    <a class="nav-link"href="{{ route('HOME') }}">Illustrations</a>
+                    <a class="nav-link"href="{{ route('MOVIE-INDEX') }}">Movies</a>
                 </li>
 
                 @if(Auth::user())
                 @if(!Auth::user()->is_admin)
 
                 <li class="nav-item">
-                    <a class="nav-link"href="{{ route('USER-LOGGED-INDEX') }}">Mes illustrations</a>
+                    <a class="nav-link"href="{{ route('MOVIE-INDEX') }}">Mes Tickets</a>
                 </li>
                 @endif
                 @endif

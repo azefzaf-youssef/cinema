@@ -15,6 +15,4 @@ interface MoviesService
 
     public function getListPaginationMovie($pagination);
 
-    public function deleteMovieTraduction($id);
-
 }
