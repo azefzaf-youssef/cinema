@@ -26,7 +26,7 @@ Artisan::command('BDD', function () {
     Schema::dropIfExists('illustration');
     Schema::dropIfExists('langue');
     Schema::dropIfExists('traduction');
-    Schema::dropIfExists('domaines');
+    Schema::dropIfExists('categories');
     Schema::dropIfExists('users');
     Schema::enableForeignKeyConstraints();
 
@@ -210,4 +210,110 @@ Artisan::command('BDD', function () {
         "default" => 1,
 
     ]);
+});
+
+
+
+Artisan::command('BDD_CINEMA', function () {
+
+    Schema::disableForeignKeyConstraints();
+    Schema::dropIfExists('movies');
+    Schema::dropIfExists('categories');
+    Schema::dropIfExists('user_tickets');
+    Schema::dropIfExists('users');
+    Schema::enableForeignKeyConstraints();
+
+    Schema::create('movies', function (Blueprint $table) {
+
+        $table->increments('id');
+        $table->string('titre')->unique();
+        $table->string('path_trailer');
+        $table->longText('movie_description');
+        $table->dateTime('time_to_start');
+        $table->date('date_movie');
+        $table->unsignedInteger('id_category');
+        $table->timestamps();
+        $table->softDeletes();
+
+    });
+
+    Schema::create('user_tickets', function (Blueprint $table) {
+
+        $table->increments('id');
+        $table->unsignedInteger('id_movie');
+        $table->unsignedInteger('id_user');
+        $table->unsignedInteger('nb_tickets');
+        $table->timestamps();
+        $table->softDeletes();
+
+    });
+
+
+
+    Schema::create('categories', function (Blueprint $table) {
+
+        $table->increments('id');
+        $table->longText('category');
+        $table->timestamps();
+        $table->softDeletes();
+
+    });
+
+    DB::table('categories')->insert([
+        'category' => 'Comedy',
+    ]);
+
+    DB::table('categories')->insert([
+        'category' => 'Drama',
+    ]);
+
+    DB::table('categories')->insert([
+        'category' => 'Romance',
+    ]);
+
+    DB::table('categories')->insert([
+        'category' => 'Science fiction',
+    ]);
+
+    DB::table('categories')->insert([
+        'category' => 'Documentary',
+    ]);
+
+
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->timestamp('email_verified_at')->nullable();
+        $table->tinyInteger('is_admin')->default(0);
+        $table->string('password');
+        $table->rememberToken();
+        $table->timestamps();
+    });
+
+    $admin = new User();
+    $admin->id = 1;
+    $admin->name = "administrateur";
+    $admin->email = "administrateur@univ-rouen.com";
+    $admin->password = Hash::make("123456");
+    $admin->is_admin = true;
+    $admin->save();
+
+    $user_khaled = new User();
+    $user_khaled->id = 2;
+    $user_khaled->name = "Anouar";
+    $user_khaled->email = "Anouar@univ-hassan-2.com";
+    $user_khaled->password = Hash::make("123456");
+    $user_khaled->is_admin = false;
+    $user_khaled->save();
+
+    $user_youssef = new User();
+    $user_youssef->id = 3;
+    $user_youssef->name = "youssef";
+    $user_youssef->email = "youssef@univ-rouen.com";
+    $user_youssef->password = Hash::make("123456");
+    $user_youssef->is_admin = false;
+    $user_youssef->save();
+
+
 });

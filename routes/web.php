@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,15 @@ Route::prefix('utilisateur')->group(function () {
 
 });
 
+Route::prefix('category')->group(function () {
+
+    Route::get('/index', [CategoryController::class, 'index'])->name('GESTION-CATEGORY');
+    Route::get('/edit/{id}', [CategoryController::class, 'editCategory'])->name('GESTION-CATEGORY-EDIT');
+    Route::post('/post', [CategoryController::class, 'postCategory'])->name('GESTION-CATEGORY-POST');
+    Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('GESTION-CATEGORY-DELETE');
+
+
+});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('HOME');
 

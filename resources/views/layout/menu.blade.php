@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link"href="{{ route('GESTION-UTILISATEUR') }}">Gestion des utilisateurs</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link"href="{{ route('GESTION-CATEGORY') }}">Gestion des catégories</a>
+                    </li>
                 @endif
                 @endif
 

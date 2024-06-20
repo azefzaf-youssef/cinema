@@ -29,7 +29,6 @@ class UtilisateurController extends Controller
     {
         $data = $this->data ;
         $data['user'] =$user= Auth::user();
-        $data['langues'] = Langue::all();
         $data['users'] = $this->utilisateurService->getListUtilisateursIllustration(8) ;
 
         return view('utilisateur.index')->with($data);
@@ -59,111 +58,5 @@ class UtilisateurController extends Controller
 
 
 
-    public function afficherIllustration($id)
-    {
 
-        $data = $this->data ;
-        $data['illustration']=$illustration=$this->utilisateurService->getIllustration($id);
-        $data['composants'] = json_decode($illustration->getComposantLangueDefaultJson());
-        $data['langues'] = Langue::whereNotIn('id',$illustration->getIllustrationTraduction()->pluck('id_langue')->toArray())->get();
-        $data['traductions'] = $illustration->getIllustrationTraductionNotDefault();
-
-        return view('illustration.affichage_composant')->with($data);
-
-    }
-
-    public function addComposantIllustration($id)
-    {
-        $data = $this->data ;
-        $data['illustration']=$this->utilisateurService->getIllustration($id);
-        return view('illustration.add_composant')->with($data);
-
-    }
-
-    public function editComposantIllustration($id)
-    {
-        $data = $this->data ;
-        $data['illustration']=$illustration=$this->utilisateurService->getIllustration($id);
-        $data['composants'] = json_decode($illustration->getComposantLangueDefaultJson());
-        return view('illustration.edit_composant')->with($data);
-
-    }
-
-    public function postAddComposantIllustration(Request $request)
-    {
-
-        return $this->utilisateurService->addComposants($request);
-
-
-    }
-
-    public function postEditComposantIllustration(Request $request)
-    {
-
-        return $this->utilisateurService->editComposants($request);
-
-
-    }
-
-
-    public function addTraductionComposantIllustration($id , $id_langue)
-    {
-        $data = $this->data ;
-
-        $data['illustration']=$illustration=$this->utilisateurService->getIllustration($id);
-        $data['composants'] = json_decode($illustration->getComposantLangueDefaultJson());
-        $data['langue'] = Langue::find($id_langue);
-
-        return view('illustration.traduction.add_traduction_composant')->with($data);
-
-    }
-
-
-    public function postAddTraductionComposantIllustration(Request $request)
-    {
-
-        return $this->utilisateurService->addTraductionComposants($request);
-
-
-    }
-
-
-    public function editTraductionComposantIllustration($id , $id_langue)
-    {
-        $data = $this->data ;
-
-        $data['illustration']=$illustration=$this->utilisateurService->getIllustration($id);
-
-        $data['composants'] = json_decode($illustration->getComposantLangueJsonById($id_langue));
-
-        $data['langue'] = Langue::find($id_langue);
-
-        return view('illustration.traduction.edit_traduction_composant')->with($data);
-
-    }
-
-    public function postEditTraductionComposantIllustration(Request $request)
-    {
-
-        return $this->utilisateurService->editTraductionComposants($request);
-
-    }
-
-    public function deleteIllustrationTraduction($id)
-    {
-        return response()->json([$this->utilisateurService->deleteIllustrationTraduction($id)]);
-
-    }
-
-    public function getIllustrationTraduction(Request $request)
-    {
-        $traduction = Traduction::where('id_illustration',$request->get('id'))
-        ->where('id_langue' ,$request->get('id_langue'))
-        ->first();
-
-        $illustration=$this->utilisateurService->getIllustration($request->get('id'));
-
-        return response()->json(json_decode($illustration->getComposantLangueJsonById($request->get('id_langue'))));
-
-    }
 }
